@@ -1,14 +1,17 @@
 import React, { useRef, useState } from 'react'
 import './App.css'
 function App() {
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
-  const [emailinfo, emailupdate] = useState("");
-  const [pwinfo, pwinfoupdate] = useState("");
+  const [emailinfo, emailupdate] = useState({
+    email: "",
+    password: "",
+
+  });
+
+
   const submitClick = () => {
-    alert(`아이디는 ${emailinfo}이고 패스워드는 ${pwinfo}로 기입함`)
+    alert(`아이디는 ${emailinfo.email}이고 패스워드는 ${emailinfo.password}로 기입함`)
   }
-  
+
   return (
     <div className='form_member'>
       <form action="#none">
@@ -19,19 +22,24 @@ function App() {
               Email
             </label><br />
             <input type="text" required name='email'
-              value={emailinfo} ref={emailRef}
+              value={emailinfo.email}
               onChange={(e) => {
-                emailupdate(e.target.value);
-                console.log(emailRef.current.value)
+                emailupdate({
+                  ...emailinfo,
+                  email: e.target.value
+                })
               }} />
           </li>
           <li>
             <label htmlFor="password">
               Password
             </label><br />
-            <input type="password" name='password' value={pwinfo}
-              required ref={passwordRef}
-              onChange={(e) => { pwinfoupdate(e.target.value) }} />
+            <input type="password" name='password' value={emailinfo.password} required
+              onChange={(e) => {
+                emailupdate({
+                  ...emailinfo,
+                  password: e.target.value
+                }) }} />
           </li>
         </ul>
         <button type='submit' onClick={submitClick}>submit</button>
