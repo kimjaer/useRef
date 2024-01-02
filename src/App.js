@@ -15,7 +15,7 @@ function App() {
               Email
             </label><br />
             <input type="text" required name='email'
-              value={emailRef.current.value} ref={emailRef}
+              value={emailinfo} ref={emailRef}
               onChange={(e) => {
                 emailupdate(e.target.value);
                 console.log(emailRef.current.value)
