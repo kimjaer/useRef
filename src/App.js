@@ -1,22 +1,10 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import './App.css'
-import { useRef } from 'react'
 function App() {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const emailValue = emailRef.current.value;
-
-    const passwordValue = passwordRef.current.value;
-    console.log('Email:', emailValue);
-
-
-    console.log('Password:', passwordValue);
-  };
-
+  const [emailinfo, emailupdate] = useState("");
+  const [pwinfo, pwinfoupdate] = useState("");
   return (
     <div className='form_member'>
       <form action="#none">
@@ -26,13 +14,18 @@ function App() {
             <label htmlFor="email">
               Email
             </label><br />
-            <input type="text" required name='email' />
+            <input type="text" required name='email'
+              value={emailRef.current.value} ref={emailRef}
+              onChange={(e) => {
+                emailupdate(e.target.value);
+                console.log(emailRef.current.value)
+              }} />
           </li>
           <li>
             <label htmlFor="password">
               Password
             </label><br />
-            <input type="password" name='password' required />
+            <input type="password" name='password' value={pwinfo} required ref={passwordRef} onChange={(e) => { pwinfoupdate(e.target.value) }} />
           </li>
         </ul>
         <button type='submit'>submit</button>
